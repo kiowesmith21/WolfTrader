@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Trader: Financial News Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 20px 0;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .buy {
+            background-color: #d4edda;
+        }
+        .sell {
+            background-color: #f8d7da;
+        }
+        .hold {
+            background-color: #fff3cd;
+        }
+        a {
+            text-decoration: none;
+            color: #1a73e8;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wolf Trader: Financial News Dashboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Sentiment</th>
+                <th>Recommendation</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for news in news %}
+                <tr class="{% if news.recommendation == 'Buy' %}buy{% elif news.recommendation == 'Sell' %}sell{% else %}hold{% endif %}">
+                    <td>{{ news.title }}</td>
+                    <td>{{ news.sentiment }}</td>
+                    <td>{{ news.recommendation }}</td>
+                    <td>
+                        {% if news.link %}
+                            <a href="{{ news.link }}" target="_blank">Read More</a>
+                        {% else %}
+                            No link available
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
